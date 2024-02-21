@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tokenization Form</title>
+</head>
+<body>
+  <div style="margin-bottom: 20px;">
+    <label for="themeSelect">Choose a theme:</label>
+    <select id="themeSelect">
+      <option value="default">Default</option>
+      <option value="light">Light</option>
+      <option value="dark">Dark</option>
+    </select>
+  </div>
+
+  <div style="width: 500px;">
+    <tokenization-form type="light">
+      <div slot="header">
+        <h1>Header</h1>
+      </div>
+      <div slot="footer">
+        <h1>Footer</h1>
+      </div>
+    </tokenization-form>
+  </div>
+  <script src="https://tokenization-form-z3m5.vercel.app/tokenization-form.umd.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const themeSelect = document.getElementById('themeSelect');
+      const TokenizationForm = document.querySelector('tokenization-form');
+
+      function changeTheme(theme) {
+        TokenizationForm.setAttribute('type', theme);
+      }
+
+      changeTheme(themeSelect.value);
+
+      themeSelect.addEventListener('change', (event) => {
+        changeTheme(event.target.value);
+      });
+
+      TokenizationForm.addEventListener('validation-error', (event) => {
+        console.log(event.detail); // Contains field and message
+      });
+    });
+  </script>
+</body>
+</html>
